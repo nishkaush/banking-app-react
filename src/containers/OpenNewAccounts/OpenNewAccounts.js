@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import "./OpenNewAccounts.css";
 import EverydayAccountAppForm from "./../../components/EverydayAccountAppForm/EverydayAccountAppForm";
 import CreditCardAppForm from "./../../components/CreditCardAppForm/CreditCardAppForm";
@@ -18,13 +18,12 @@ class OpenNewAccounts extends Component {
   };
 
   chosenApplicationFormHandler(formType) {
-    console.log("this", this);
-    console.log("formType", formType);
     this.setState({ chosenApplicationType: formType });
   }
-  render() {
-    const newAccountOpenOptions = (
-      <div className="open__new__acc__options">
+
+  renderNewAccountOpenOptions() {
+    return (
+      <Container className="open__new__acc__options">
         {this.state.btnData.map(btn => {
           return (
             <Button
@@ -41,21 +40,32 @@ class OpenNewAccounts extends Component {
             </Button>
           );
         })}
-      </div>
+      </Container>
     );
+  }
+
+  handleFormTypeRendering() {
+    if (!this.state.chosenApplicationType) {
+      return this.renderNewAccountOpenOptions();
+    } else if (this.state.chosenApplicationType === "everydayAcc") {
+      return (
+        <EverydayAccountAppForm
+          quitForm={this.chosenApplicationFormHandler.bind(this)}
+        />
+      );
+    } else if (this.state.chosenApplicationType === "creditCard") {
+      return (
+        <CreditCardAppForm
+          quitForm={this.chosenApplicationFormHandler.bind(this)}
+        />
+      );
+    }
+  }
+
+  render() {
     return (
       <div className="open__new__acc__container">
-        {!this.state.chosenApplicationType ? newAccountOpenOptions : null}
-        {this.state.chosenApplicationType === "everydayAcc" ? (
-          <EverydayAccountAppForm
-            quitForm={this.chosenApplicationFormHandler.bind(this)}
-          />
-        ) : null}
-        {this.state.chosenApplicationType === "creditCard" ? (
-          <CreditCardAppForm
-            quitForm={this.chosenApplicationFormHandler.bind(this)}
-          />
-        ) : null}
+        {this.handleFormTypeRendering()}
       </div>
     );
   }

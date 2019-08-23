@@ -1,0 +1,16 @@
+.everyday__account__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-content: space-between;
+  margin: 2%;
+}
+
+.bottom_btn_container {
+  display: flex;
+  justify-content: center;
+}
+
+.bottom_btn_container button {
+  margin: 0% 1%;
+}

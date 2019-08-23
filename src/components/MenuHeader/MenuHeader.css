@@ -1,12 +1,11 @@
 .menu__header__container {
   display: flex;
-  justify-content: space-between;
-  background: #5AC18E;
-  padding: 0.5% 1%;
+  justify-content: space-around;
+  /* background: #5AC18E; */
+  /* padding: 0.5% 1%; */
 }
 
-.menu__header__container a {
-  /* padding: 1%; */
+a {
   margin: 1%;
   font-size: 1em;
   font-weight: bold;
@@ -17,4 +16,11 @@
 .menu__links {
   display: flex;
   justify-content: flex-end;
+}
+
+.menu__links a {
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  flex: 1;
 }

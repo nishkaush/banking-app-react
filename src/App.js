@@ -8,12 +8,13 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    showSpinner: true
+    showSpinner: false
   };
 
-  componentDidMount() {
-    setTimeout(() => this.setState({ showSpinner: false }), 500);
-  }
+  // componentDidMount() {
+  //   // this.setState({ showSpinner: false });
+  //   // setTimeout(() => this.setState({ showSpinner: false }), 500);
+  // }
   render() {
     const comp = (
       <React.Fragment>
