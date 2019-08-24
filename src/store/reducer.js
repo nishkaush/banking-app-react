@@ -15,7 +15,16 @@ const reducer = (state = initialState, action) => {
         ? action.payload.initialDeposit
         : 0,
       dateOpened: Date.now(),
-      transaction: []
+      transactions: []
+    };
+    let newUserAccounts = [...state.userAccounts, newObj];
+    return { ...state, userAccounts: newUserAccounts };
+  } else if (action.type === "CREDITCARD__APP__FORM__SUBMIT") {
+    let newObj = {
+      ...action.payload,
+      balance: action.payload.creditLimit,
+      dateOpened: Date.now(),
+      transactions: []
     };
     let newUserAccounts = [...state.userAccounts, newObj];
     return { ...state, userAccounts: newUserAccounts };

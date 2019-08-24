@@ -144,7 +144,7 @@ class EveryDayAccountAppForm extends Component {
   render() {
     return (
       <Container>
-        <h3>EveryDayAccount Applicaiton form</h3>
+        <h3>EveryDayAccount Application form(Made with Material UI)</h3>
         <form className="everyday__account__form">
           {this.state.textfieldsArr.map((elm, ind) =>
             elm.type === "select" ? (

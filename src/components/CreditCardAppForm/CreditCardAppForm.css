@@ -1,0 +1,68 @@
+.credit__card__app__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.credit__card__app__form input {
+  border: 1px solid white;
+  padding: 1%;
+  border-bottom: 1px solid #eee;
+  margin: 1%;
+  padding-left: 2%;
+  border-radius: 10px;
+  font-size: 0.9em;
+}
+
+.credit__card__app__form input:focus {
+  outline: none;
+  /* background: #eee */
+}
+
+.credit__card__app__form .btn_container {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  margin: 2% auto;
+}
+
+.credit__card__app__form button {
+  padding: 3% 4%;
+  background: royalblue;
+  color: white;
+  width: 50%;
+  font-size: 0.9em;
+  border: none;
+  margin: 2%;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.credit__card__app__form button:hover {
+  background: rgb(94, 123, 211);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+}
+
+.error__msg__helper {
+  padding-left: 3%;
+  font-size: 0.7em;
+  margin-bottom: 0.5%;
+}
+
+.error__msg__helper span {
+  /* margin: 0 0.5%; */
+  color: red;
+}
