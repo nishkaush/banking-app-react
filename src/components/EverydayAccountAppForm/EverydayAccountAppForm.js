@@ -18,16 +18,52 @@ class EveryDayAccountAppForm extends Component {
         type: "select",
         name: "accountType",
         label: "Choose Account Type",
-        value: ""
+        value: "",
+        touched: false
       },
-      { type: "input", name: "fullName", label: "Full Name", value: "" },
-      { type: "input", name: "email", label: "Email", value: "" },
-      { type: "input", name: "mobile", label: "Mobile", value: "" },
+      {
+        type: "input",
+        name: "fullName",
+        label: "Full Name",
+        value: "",
+        touched: false,
+        inputProps: {
+          type: "text",
+          required: true
+        }
+      },
+      {
+        type: "input",
+        name: "email",
+        label: "Email",
+        value: "",
+        touched: false,
+        inputProps: {
+          type: "email",
+          required: true
+        }
+      },
+      {
+        type: "input",
+        name: "mobile",
+        label: "Mobile",
+        value: "",
+        touched: false,
+        inputProps: {
+          type: "number",
+          required: true
+        }
+      },
       {
         type: "input",
         name: "initialDeposit",
         label: "Initial Deposit Amount",
-        value: ""
+        value: "",
+        touched: false,
+        inputProps: {
+          type: "number"
+          // required: true
+        }
       }
     ]
   };
@@ -35,6 +71,7 @@ class EveryDayAccountAppForm extends Component {
   handleOnChange(ind, event) {
     let targetedObj = { ...this.state.textfieldsArr[ind] };
     targetedObj.value = event.target.value;
+    targetedObj.touched = true;
     this.setState(state => {
       state.textfieldsArr[ind] = targetedObj;
       return state;
@@ -62,13 +99,44 @@ class EveryDayAccountAppForm extends Component {
   }
 
   handleFormSubmit() {
+    let formError = this.state.textfieldsArr.find(
+      e => e.inputProps && e.inputProps.required && !e.value
+    );
+    formError
+      ? this.showDialog({
+          status: "Error",
+          msg: "Please fill out all required fields before submitting the form"
+        })
+      : this.submitDataToRedux();
+  }
+
+  showDialog(payload) {
+    this.setState(state => {
+      state.textfieldsArr.forEach(e => {
+        if (e.inputProps && e.inputProps.required && !e.value) {
+          e.touched = true;
+        }
+        return state;
+      });
+    });
+    this.props.onShowDialog(payload);
+  }
+
+  submitDataToRedux() {
     let payload = {};
     this.state.textfieldsArr.forEach(elm => {
       payload[elm.name] = elm.value;
     });
     this.props.onFormSubmit(payload);
+    this.props.onShowDialog({
+      status: "Success",
+      msg: "Account created successfully!"
+    });
     this.setState(state => {
-      state.textfieldsArr.forEach(field => (field.value = ""));
+      state.textfieldsArr.forEach(field => {
+        field.value = "";
+        field.touched = false;
+      });
       return state;
     });
   }
@@ -83,12 +151,17 @@ class EveryDayAccountAppForm extends Component {
               this.renderSelectElement(elm.label, elm.value, ind)
             ) : (
               <TextField
+                inputProps={{ ...elm.inputProps }}
                 margin="dense"
                 key={elm.label}
                 variant="outlined"
                 label={elm.label}
                 onChange={this.handleOnChange.bind(this, ind)}
                 value={elm.value}
+                error={!elm.value && elm.touched}
+                helperText={
+                  !elm.value && elm.touched ? "Field is required" : null
+                }
               />
             )
           )}
@@ -117,7 +190,8 @@ class EveryDayAccountAppForm extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onFormSubmit: formData =>
-      dispatch({ type: "EVERYDAY_ACC_FORM_SUBMIT", payload: formData })
+      dispatch({ type: "EVERYDAY_ACC_FORM_SUBMIT", payload: formData }),
+    onShowDialog: payload => dispatch({ type: "SHOW_DIALOG", payload })
   };
 };
 export default connect(

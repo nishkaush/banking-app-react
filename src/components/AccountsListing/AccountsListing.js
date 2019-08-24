@@ -5,7 +5,7 @@ const AccountsListing = props => {
   return (
     <TableRow>
       <TableCell>{props.name}</TableCell>
-      <TableCell>{props.balance ? <td>{props.balance}</td> : null}</TableCell>
+      <TableCell>{props.balance ? props.balance : null}</TableCell>
     </TableRow>
   );
 };

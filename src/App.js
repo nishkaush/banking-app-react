@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home/Home";
 import MenuHeader from "./components/MenuHeader/MenuHeader";
 import TransferMoney from "./containers/TransferMoney/TransferMoney";
 import OpenNewAccounts from "./containers/OpenNewAccounts/OpenNewAccounts";
+import DialogAlert from "./components/DialogAlert/DialogAlert";
 import "./App.css";
 
 class App extends Component {
@@ -18,6 +20,12 @@ class App extends Component {
   render() {
     const comp = (
       <React.Fragment>
+        <DialogAlert
+          open={this.props.showDialog}
+          status={this.props.dialogStatus}
+          msg={this.props.dialogMsg}
+          close={this.props.onCloseDialog.bind(this)}
+        />
         <MenuHeader />
         <Switch>
           <Route path="/" exact component={Home} />
@@ -33,7 +41,24 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    showDialog: state.dialog.show,
+    dialogMsg: state.dialog.msg,
+    dialogStatus: state.dialog.status
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onCloseDialog: () => dispatch({ type: "CLOSE_DIALOG" })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
 
 // <Route path="/" exact component={LoadingPage} />
 //

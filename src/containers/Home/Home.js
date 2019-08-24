@@ -19,8 +19,12 @@ class Home extends Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell component="th">Type</TableCell>
-              <TableCell component="th">Balance</TableCell>
+              <TableCell key={Math.random()} component="th">
+                Type
+              </TableCell>
+              <TableCell key={Math.random()} component="th">
+                Balance
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -49,7 +53,6 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state", state);
   return {
     activeAccounts: state.userAccounts
   };
