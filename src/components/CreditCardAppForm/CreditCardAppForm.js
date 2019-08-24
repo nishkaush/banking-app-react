@@ -157,6 +157,7 @@ class CreditCardAppForm extends Component {
 
   preparePayloadForFormSubmission() {
     let payload = {};
+    payload.accountType = "Credit Card";
     this.state.textfieldsArr.forEach(e => (payload[e.name] = e.value));
     return payload;
   }
@@ -168,7 +169,9 @@ class CreditCardAppForm extends Component {
     let liabilitiesValue = this.state.textfieldsArr.find(
       e => e.name === "liabilitiesValue"
     );
-    return assetsValue > liabilitiesValue ? true : false;
+    return parseFloat(assetsValue.value) > parseFloat(liabilitiesValue.value)
+      ? true
+      : false;
   }
 
   render() {
