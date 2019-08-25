@@ -1,0 +1,53 @@
+.transfer__money__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.transfer__money__form select {
+  padding: 1%;
+  height: 3em;
+  margin: 1%;
+  cursor: pointer;
+  border: none;
+  border-bottom: 1px solid #eee;
+  font-size: 0.7em;
+  color: #666;
+  background: white;
+}
+
+.transfer__money__form select:focus {
+  outline: none;
+}
+
+.transfer__money__form input {
+  border: none;
+  border-bottom: 1px solid #eee;
+  margin: 2% 1%;
+  padding: 2%;
+}
+
+.transfer__money__form input:focus {
+  outline: none;
+}
+
+.transfer__money__form button {
+  padding: 2% 0%;
+  width: 50%;
+  border-radius: 5px;
+  margin: 0 auto;
+  background: royalblue;
+  color: white;
+  font-size: 0.9em;
+  margin-top: 3%;
+  border: none;
+  box-shadow: 0px 2px 50px 5px #eee;
+  cursor: pointer;
+}
+
+.transfer__money__form button:hover {
+  background: rgb(104, 132, 218);
+}
+
+.transfer__money__form button:focus {
+  outline: none;
+}

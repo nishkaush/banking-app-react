@@ -87,10 +87,10 @@ class EveryDayAccountAppForm extends Component {
           onChange={this.handleOnChange.bind(this, ind)}
           value={val}
         >
-          <MenuItem key={Math.random()} value="Transaction">
+          <MenuItem key={34534534} value="Transaction">
             Transaction
           </MenuItem>
-          <MenuItem key={Math.random()} value="Savings">
+          <MenuItem key={3523434} value="Savings">
             Savings
           </MenuItem>
         </Select>

@@ -13,24 +13,36 @@ import {
 // import { Container } from "@material-ui/core";
 
 class Home extends Component {
+  componentDidMount() {
+    console.log("userAccounts", this.props.activeAccounts);
+  }
+
   handleAccountsListing() {
     if (this.props.activeAccounts.length) {
       return (
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell key={Math.random()} component="th">
+              <TableCell key={23424234} component="th">
                 Type
               </TableCell>
-              <TableCell key={Math.random()} component="th">
-                Balance
+              <TableCell key={56767688} component="th">
+                Balance ($)
+              </TableCell>
+              <TableCell key={5676768890} component="th">
+                Available ($)
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {this.props.activeAccounts.map(acc => {
               return (
-                <AccountsListing name={acc.accountType} balance={acc.balance} />
+                <AccountsListing
+                  key={acc.id}
+                  name={acc.accountType}
+                  balance={acc.balance}
+                  available={acc.creditLimit ? acc.creditLimit : acc.balance}
+                />
               );
             })}
           </TableBody>
@@ -43,7 +55,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container className={styles.accounts__balance__container}>
+      <Container maxWidth="md" className={styles.accounts__balance__container}>
         <h2>Your Accounts</h2>
         <hr />
         {this.handleAccountsListing()}
