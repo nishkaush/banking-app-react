@@ -1,5 +1,6 @@
 const initialState = {
-  userAccounts: []
+  userAccounts: [],
+  viewTransactionsForAcc: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -66,6 +67,14 @@ const reducer = (state = initialState, action) => {
     newUserAccounts[toAccInd] = toAccountObj;
 
     return { ...state, userAccounts: newUserAccounts };
+  } else if (action.type === "DELETE__ACCOUNT") {
+    let newUserAccounts = state.userAccounts.filter(
+      acc => acc.id !== action.id
+    );
+    return { ...state, userAccounts: newUserAccounts };
+  } else if (action.type === "VIEW__ACC__TRANSACTIONS") {
+    let foundObj = { ...state.userAccounts.find(acc => acc.id === action.id) };
+    return { ...state, viewTransactionsForAcc: foundObj };
   }
   return state;
 };

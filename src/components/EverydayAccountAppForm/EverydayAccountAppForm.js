@@ -19,7 +19,11 @@ class EveryDayAccountAppForm extends Component {
         name: "accountType",
         label: "Choose Account Type",
         value: "",
-        touched: false
+        touched: false,
+        inputProps: {
+          type: "text",
+          required: true
+        }
       },
       {
         type: "input",
@@ -61,8 +65,8 @@ class EveryDayAccountAppForm extends Component {
         value: "",
         touched: false,
         inputProps: {
-          type: "number"
-          // required: true
+          type: "number",
+          required: true
         }
       }
     ]

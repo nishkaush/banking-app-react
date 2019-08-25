@@ -10,11 +10,15 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
-// import { Container } from "@material-ui/core";
 
 class Home extends Component {
-  componentDidMount() {
-    console.log("userAccounts", this.props.activeAccounts);
+  deleteAcccount(accID) {
+    this.props.onDeleteAccount(accID);
+  }
+
+  handleShowTransactionsListingPage(accID) {
+    // navigate to /transactions/:id
+    this.props.history.push(`/transactions/${accID}`);
   }
 
   handleAccountsListing() {
@@ -32,6 +36,7 @@ class Home extends Component {
               <TableCell key={5676768890} component="th">
                 Available ($)
               </TableCell>
+              <TableCell key={568890} component="th"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -42,6 +47,11 @@ class Home extends Component {
                   name={acc.accountType}
                   balance={acc.balance}
                   available={acc.creditLimit ? acc.creditLimit : acc.balance}
+                  delete={this.deleteAcccount.bind(this, acc.id)}
+                  showTransactions={this.handleShowTransactionsListingPage.bind(
+                    this,
+                    acc.id
+                  )}
                 />
               );
             })}
@@ -69,4 +79,13 @@ const mapStateToProps = state => {
     activeAccounts: state.AccountsReducer.userAccounts
   };
 };
-export default connect(mapStateToProps)(Home);
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onDeleteAccount: accID => dispatch({ type: "DELETE__ACCOUNT", id: accID })
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

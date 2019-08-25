@@ -23,7 +23,7 @@ class OpenNewAccounts extends Component {
 
   renderNewAccountOpenOptions() {
     return (
-      <Container className="open__new__acc__options">
+      <Container maxWidth="md" className="open__new__acc__options">
         {this.state.btnData.map(btn => {
           return (
             <Button
