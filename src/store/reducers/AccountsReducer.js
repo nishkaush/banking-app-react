@@ -1,9 +1,4 @@
 const initialState = {
-  dialog: {
-    show: false,
-    status: "",
-    msg: ""
-  },
   userAccounts: []
 };
 
@@ -28,10 +23,6 @@ const reducer = (state = initialState, action) => {
     };
     let newUserAccounts = [...state.userAccounts, newObj];
     return { ...state, userAccounts: newUserAccounts };
-  } else if (action.type === "SHOW_DIALOG") {
-    return { ...state, dialog: { ...action.payload, show: true } };
-  } else if (action.type === "CLOSE_DIALOG") {
-    return { ...state, dialog: { show: false, status: "", msg: "" } };
   }
   return state;
 };

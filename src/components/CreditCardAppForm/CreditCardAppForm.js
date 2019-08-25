@@ -91,7 +91,7 @@ class CreditCardAppForm extends Component {
   }
 
   validateField(ind, event) {
-    console.log("ind", ind);
+    // console.log("ind", ind);
     let foundObj = { ...this.state.textfieldsArr[ind] };
     if (
       foundObj.touched === true &&
@@ -100,17 +100,17 @@ class CreditCardAppForm extends Component {
       let flag = this.handleValidationFunctions(
         foundObj.validation,
         foundObj,
-        event
+        event.target.value
       );
       this.setupErrorPropsForField(foundObj, ind, flag);
     }
   }
 
-  handleValidationFunctions(validationObj, foundObj, event) {
+  handleValidationFunctions(validationObj, foundObj, val) {
     let flag = true;
     foundObj.errorMessages = [];
     for (let key in validationObj) {
-      let result = validationObj[key](event.target.value);
+      let result = validationObj[key](val);
       if (result !== true) {
         flag = false;
         foundObj.errorMessages.push(result);
@@ -138,13 +138,22 @@ class CreditCardAppForm extends Component {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    let allFieldAreValid = this.checkFormValidity();
+    let allFieldsAreValid = this.checkFormValidity();
+    let assetsMoreThanLiabilities = this.checkAssetsAndLiabilities();
     let payload = this.preparePayloadForFormSubmission();
-    allFieldAreValid && this.checkAssetsAndLiabilities()
-      ? this.props.onFormSubmit(payload)
-      : alert(
-          "Fill out all fields first And make sure your assets are bigger than your liabilities "
-        );
+    if (allFieldsAreValid && assetsMoreThanLiabilities) {
+      this.props.onFormSubmit(payload);
+      this.props.onShowDialogAlert({
+        status: "Success",
+        msg: "Credit Card successfully created!"
+      });
+      this.resetForm();
+    } else {
+      this.handleErrorOnFormSubmit(
+        allFieldsAreValid,
+        assetsMoreThanLiabilities
+      );
+    }
   }
 
   checkFormValidity() {
@@ -174,6 +183,37 @@ class CreditCardAppForm extends Component {
       : false;
   }
 
+  resetForm() {
+    this.setState(state => {
+      state.textfieldsArr.forEach(e => {
+        e.value = "";
+        e.error = false;
+        e.errorMessages = [];
+        e.touched = false;
+      });
+    });
+  }
+
+  handleErrorOnFormSubmit(allFieldsAreValid, assetsMoreThanLiabilities) {
+    if (!allFieldsAreValid && assetsMoreThanLiabilities) {
+      let msg = "Provide a valid value for all required fields (marked with *)";
+      this.showErrorAlert(msg);
+    } else if (allFieldsAreValid && !assetsMoreThanLiabilities) {
+      let msg = "Make sure assets value is bigger than liabilities";
+      this.showErrorAlert(msg);
+    } else if (!allFieldsAreValid && !assetsMoreThanLiabilities) {
+      let msg =
+        "Provide a valid value for all required fields (marked with *) and ensure assets value is bigger than liabilities";
+      this.showErrorAlert(msg);
+    }
+  }
+  showErrorAlert(msg) {
+    this.props.onShowDialogAlert({
+      status: "Error",
+      msg
+    });
+  }
+
   render() {
     return (
       <Container maxWidth="md">
@@ -181,13 +221,17 @@ class CreditCardAppForm extends Component {
         <form action="" className="credit__card__app__form">
           {this.state.textfieldsArr.map((elm, ind) => (
             <React.Fragment key={elm.name}>
+              <label htmlFor={elm.name}>
+                {elm.validation.onRequired ? elm.label + " *" : elm.label}
+              </label>
               <input
+                id={elm.name}
                 name={elm.name}
                 type={elm.type}
                 value={elm.value}
-                placeholder={elm.label}
                 onChange={this.handleOnChange.bind(this, ind)}
                 onBlur={this.validateField.bind(this, ind)}
+                autoFocus={ind === 0 ? true : false}
               />
               {elm.error ? (
                 <small className="error__msg__helper">
@@ -219,7 +263,8 @@ class CreditCardAppForm extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onFormSubmit: payload =>
-      dispatch({ type: "CREDITCARD__APP__FORM__SUBMIT", payload })
+      dispatch({ type: "CREDITCARD__APP__FORM__SUBMIT", payload }),
+    onShowDialogAlert: payload => dispatch({ type: "SHOW_DIALOG", payload })
   };
 };
 export default connect(

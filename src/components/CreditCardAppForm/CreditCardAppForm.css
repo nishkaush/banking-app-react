@@ -5,9 +5,10 @@
 
 .credit__card__app__form input {
   border: 1px solid white;
-  padding: 1%;
+  padding: 0% 1% 1% 1%;
+  /* border-top: 1px solid #eee; */
   border-bottom: 1px solid #eee;
-  margin: 1%;
+  margin: 0% 1% 1% 1%;
   padding-left: 2%;
   border-radius: 10px;
   font-size: 0.9em;
@@ -16,6 +17,14 @@
 .credit__card__app__form input:focus {
   outline: none;
   /* background: #eee */
+}
+
+.credit__card__app__form label {
+  font-size: 0.7em;
+  padding-left: 3%;
+  padding-bottom: 0.5%;
+  color: #939393;
+  margin-top: 1.5%;
 }
 
 .credit__card__app__form .btn_container {
@@ -56,10 +65,11 @@ input:focus::placeholder {
   opacity: 0;
 }
 
+
 .error__msg__helper {
   padding-left: 3%;
-  font-size: 0.7em;
-  margin-bottom: 0.5%;
+  font-size: 0.6em;
+  margin-bottom: 1%;
 }
 
 .error__msg__helper span {

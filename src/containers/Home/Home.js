@@ -54,7 +54,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    activeAccounts: state.userAccounts
+    activeAccounts: state.AccountsReducer.userAccounts
   };
 };
 export default connect(mapStateToProps)(Home);

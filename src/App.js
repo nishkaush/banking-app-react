@@ -43,9 +43,9 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    showDialog: state.dialog.show,
-    dialogMsg: state.dialog.msg,
-    dialogStatus: state.dialog.status
+    showDialog: state.DialogAlertReducer.dialog.show,
+    dialogMsg: state.DialogAlertReducer.dialog.msg,
+    dialogStatus: state.DialogAlertReducer.dialog.status
   };
 };
 
