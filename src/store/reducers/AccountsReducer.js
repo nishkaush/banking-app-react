@@ -1,4 +1,5 @@
 const initialState = {
+  viewTransactionsForAcc: {},
   userAccounts: [
     // {
     //   id: "2",
@@ -18,11 +19,11 @@ const initialState = {
     //     }
     //   ]
     // }
-  ],
-  viewTransactionsForAcc: {}
+  ]
 };
 
 const reducer = (state = initialState, action) => {
+  // This handles everyday account form submission
   if (action.type === "EVERYDAY_ACC_FORM_SUBMIT") {
     let newObj = {
       ...action.payload,
@@ -35,7 +36,11 @@ const reducer = (state = initialState, action) => {
     };
     let newUserAccounts = [...state.userAccounts, newObj];
     return { ...state, userAccounts: newUserAccounts };
-  } else if (action.type === "CREDITCARD__APP__FORM__SUBMIT") {
+  }
+
+  // =================================================
+  // This handles credit card app form submission
+  else if (action.type === "CREDITCARD__APP__FORM__SUBMIT") {
     let newObj = {
       ...action.payload,
       balance: parseFloat(action.payload.creditLimit),
@@ -45,8 +50,12 @@ const reducer = (state = initialState, action) => {
     };
     let newUserAccounts = [...state.userAccounts, newObj];
     return { ...state, userAccounts: newUserAccounts };
-  } else if (action.type === "TRANSFER__MONEY") {
-    //find the two accounts using the id given in the payload
+  }
+
+  // =================================================
+  // This handles transfer of money between accounts
+  else if (action.type === "TRANSFER__MONEY") {
+    //find the index two accounts using the id given in the payload
     let fromAccInd = state.userAccounts.findIndex(
       acc => acc.id === action.payload.fromAccount
     );
@@ -54,8 +63,17 @@ const reducer = (state = initialState, action) => {
       acc => acc.id === action.payload.toAccount
     );
 
+    //find the actual accounts using indices and create a copy
     let fromAccountObj = { ...state.userAccounts[fromAccInd] };
     let toAccountObj = { ...state.userAccounts[toAccInd] };
+
+    // //make a copy of the nested transactions array(could do it but not needed in this case)
+    // fromAccountObj.transactions = fromAccountObj.transactions.map(e=>{
+    //   return {...e};
+    // })
+    // toAccountObj.transactions = toAccountObj.transactions.map(e=>{
+    //   return {...e};
+    // })
 
     //adjust the balances for each account
     let amount = action.payload.amountToTransfer;
@@ -87,18 +105,31 @@ const reducer = (state = initialState, action) => {
     newUserAccounts[toAccInd] = toAccountObj;
 
     return { ...state, userAccounts: newUserAccounts };
-  } else if (action.type === "DELETE__ACCOUNT") {
+  }
+
+  // =================================================
+  // This handles Account deletion
+  else if (action.type === "DELETE__ACCOUNT") {
     let newUserAccounts = state.userAccounts.filter(
       acc => acc.id !== action.id
     );
     return { ...state, userAccounts: newUserAccounts };
-  } else if (action.type === "VIEW__ACC__TRANSACTIONS") {
+  }
+
+  // =================================================
+  // This handles setting up the transactions to be viewed for a given account
+  // could do a deep clone but not needed in this case since we only push into the array
+  // And if the original array were to updated, we would want to know about it
+  else if (action.type === "VIEW__ACC__TRANSACTIONS") {
     let foundObj = { ...state.userAccounts.find(acc => acc.id === action.id) };
     return { ...state, viewTransactionsForAcc: foundObj };
   }
   return state;
 };
+// =====Reducer ends================
 
+// =================================================
+// Just an additional helper function
 const createTransObj = (type, accountObj, amount, message) => {
   return {
     transactionType: type,
@@ -108,4 +139,5 @@ const createTransObj = (type, accountObj, amount, message) => {
     message
   };
 };
+
 export default reducer;
