@@ -1,0 +1,20 @@
+.single__transaction__listing {
+  margin-bottom: 1%;
+}
+
+.single__transaction__listing .credit__transaction {
+  color: green;
+  font-weight: bold;
+  margin: auto 3%;
+}
+
+.single__transaction__listing .debit__transaction {
+  color: red;
+  font-weight: bold;
+  margin: auto 3%;
+}
+
+.single__transaction__listing p {
+  margin: auto 3%;
+
+}

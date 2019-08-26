@@ -20,9 +20,17 @@ class TransferMoney extends Component {
       },
       {
         type: "input",
+        valueType: "number",
         name: "amountToTransfer",
         value: "",
         label: "Enter Amount to transfer ($)"
+      },
+      {
+        type: "input",
+        valueType: "text",
+        name: "message",
+        value: "",
+        label: "Enter a transaction message"
       }
     ]
   };
@@ -100,7 +108,7 @@ class TransferMoney extends Component {
             ) : (
               <input
                 key={field.label}
-                type="number"
+                type={field.valueType}
                 value={field.value}
                 placeholder={field.label}
                 onChange={this.handleOnChange.bind(this, ind)}

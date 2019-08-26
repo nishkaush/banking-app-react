@@ -1,5 +1,24 @@
 const initialState = {
-  userAccounts: [],
+  userAccounts: [
+    // {
+    //   id: "2",
+    //   accountType: "Credit card",
+    //   balance: 9000,
+    //   dateOpened: "3March 2019",
+    //   fullName: "Maximillian",
+    //   email: "shit@s.com",
+    //   creditLimit: 5000,
+    //   transactions: [
+    //     {
+    //       transactionType: "CREDIT",
+    //       from: { id: "asdfsadfasdasfID", name: "Savings Account" },
+    //       date: Date.now(),
+    //       amount: 400000,
+    //       message: "This is a sample transaction message"
+    //     }
+    //   ]
+    // }
+  ],
   viewTransactionsForAcc: {}
 };
 
@@ -12,7 +31,7 @@ const reducer = (state = initialState, action) => {
         : 0,
       dateOpened: Date.now(),
       transactions: [],
-      id: "everydayAcc" + Math.random()
+      id: "ID" + Math.random()
     };
     let newUserAccounts = [...state.userAccounts, newObj];
     return { ...state, userAccounts: newUserAccounts };
@@ -22,7 +41,7 @@ const reducer = (state = initialState, action) => {
       balance: parseFloat(action.payload.creditLimit),
       dateOpened: Date.now(),
       transactions: [],
-      id: "creditCard" + Math.random()
+      id: "ID" + Math.random()
     };
     let newUserAccounts = [...state.userAccounts, newObj];
     return { ...state, userAccounts: newUserAccounts };
@@ -39,23 +58,24 @@ const reducer = (state = initialState, action) => {
     let toAccountObj = { ...state.userAccounts[toAccInd] };
 
     //adjust the balances for each account
-    fromAccountObj.balance -= parseFloat(action.payload.amountToTransfer);
-    toAccountObj.balance += parseFloat(action.payload.amountToTransfer);
+    let amount = action.payload.amountToTransfer;
+    fromAccountObj.balance -= parseFloat(amount);
+    toAccountObj.balance += parseFloat(amount);
 
     //write the transaction record for each account
-    let creditTransactionObj = {
-      transactionType: "CREDIT",
-      from: { id: fromAccountObj.id, name: fromAccountObj.accountType },
-      date: Date.now(),
-      amount: parseFloat(action.payload.amountToTransfer)
-    };
-    let debitTransactionObj = {
-      transactionType: "DEBIT",
-      to: { id: toAccountObj.id, name: toAccountObj.accountType },
-      date: Date.now(),
-      amount: parseFloat(action.payload.amountToTransfer)
-    };
-
+    let msg = action.payload.message;
+    let creditTransactionObj = createTransObj(
+      "CREDIT",
+      fromAccountObj,
+      amount,
+      msg
+    );
+    let debitTransactionObj = createTransObj(
+      "DEBIT",
+      toAccountObj,
+      amount,
+      msg
+    );
     // also register the same transaction under credit and debit under both objects
     fromAccountObj.transactions.push(debitTransactionObj);
     toAccountObj.transactions.push(creditTransactionObj);
@@ -79,4 +99,13 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
+const createTransObj = (type, accountObj, amount, message) => {
+  return {
+    transactionType: type,
+    to: { id: accountObj.id, name: accountObj.accountType },
+    date: Date.now(),
+    amount: parseFloat(amount),
+    message
+  };
+};
 export default reducer;

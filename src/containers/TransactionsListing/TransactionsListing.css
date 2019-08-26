@@ -1,0 +1,23 @@
+.transactions__listing__container {
+  margin: 2% auto;
+  width: 60%;
+  text-align: left;
+}
+
+.transactions__listing__container table {
+  text-align: left;
+}
+
+.transactions__listing__container table tr {
+  line-height: 2em;
+}
+
+.transactions__listing__container table th {
+  color: #666;
+  font-size: 0.8em;
+}
+
+.transactions__listing__container table td {
+  font-size: 0.8em;
+  color: #666;
+}

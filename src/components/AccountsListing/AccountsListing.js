@@ -6,6 +6,12 @@ const useStyles = makeStyles(theme => ({
     color: "blue",
     fontWeight: "bold",
     cursor: "pointer"
+  },
+  posBal: {
+    color: "green"
+  },
+  negBal: {
+    color: "red"
   }
 }));
 const AccountsListing = props => {
@@ -18,8 +24,14 @@ const AccountsListing = props => {
       >
         {props.name}
       </TableCell>
-      <TableCell>{props.balance ? props.balance : null}</TableCell>
-      <TableCell>{props.available ? props.available : null}</TableCell>
+      <TableCell
+        className={props.balance > 0 ? classes.posBal : classes.negBal}
+      >
+        {props.balance ? props.balance : null}
+      </TableCell>
+      <TableCell>
+        {props.available ? (props.available > 0 ? props.available : 0) : null}
+      </TableCell>
       <TableCell>
         <Icon onClick={props.delete}>delete</Icon>
       </TableCell>
