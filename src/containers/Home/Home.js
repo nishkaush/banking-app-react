@@ -59,7 +59,7 @@ class Home extends Component {
         </Table>
       );
     } else {
-      return <p>No Accounts Found</p>;
+      return <p>No Accounts Found. Open new accounts to start playing.</p>;
     }
   }
 

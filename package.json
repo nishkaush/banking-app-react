@@ -18,7 +18,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "git": "git add . && git commit -m",
-    "postgit": "git push"
+    "postgit": "git push",
+    "deploy": "npm run build",
+    "postdeploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
