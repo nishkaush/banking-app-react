@@ -3,7 +3,7 @@ import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import "./CreditCardAppForm.css";
 
-class CreditCardAppForm extends Component {
+export class CreditCardAppForm extends Component {
   state = {
     textfieldsArr: [
       {
@@ -178,6 +178,7 @@ class CreditCardAppForm extends Component {
     let liabilitiesValue = this.state.textfieldsArr.find(
       e => e.name === "liabilitiesValue"
     );
+    if (!assetsValue.value || !liabilitiesValue.value) return false;
     return parseFloat(assetsValue.value) > parseFloat(liabilitiesValue.value)
       ? true
       : false;
@@ -250,7 +251,11 @@ class CreditCardAppForm extends Component {
             <button key={10923} onClick={() => this.props.quitForm(null)}>
               Quit Application
             </button>
-            <button key={93499} onClick={this.handleFormSubmit.bind(this)}>
+            <button
+              id="submitBtn"
+              key={93499}
+              onClick={this.handleFormSubmit.bind(this)}
+            >
               Submit
             </button>
           </div>

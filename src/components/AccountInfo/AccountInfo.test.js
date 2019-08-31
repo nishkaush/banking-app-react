@@ -1,9 +1,9 @@
 import React from "react";
-import { configure, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
+// import Adapter from "enzyme-adapter-react-16";
 import AccountInfo from "./AccountInfo";
 
-configure({ adapter: new Adapter() });
+// configure({ adapter: new Adapter() });
 
 describe("<AccountInfo/>", () => {
   const data = {
