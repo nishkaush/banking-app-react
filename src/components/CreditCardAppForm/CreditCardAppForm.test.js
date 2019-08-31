@@ -168,5 +168,45 @@ describe("<CreditCardAppForm/>", () => {
         expect(onShowDialogAlert).toHaveBeenLastCalledWith({ status, msg });
       });
     });
+
+    // SUCCESSFUL FORM SUBMISSION
+
+    describe("Successful form submission", () => {
+      let initialState = { ...wrapper.state() };
+
+      it("successfully submits the form", () => {
+        let onFormSubmit = jest.fn();
+        let onShowDialogAlert = jest.fn();
+
+        wrapper.setProps({ onFormSubmit, onShowDialogAlert });
+        let obj = {
+          fullName: "Maximillian",
+          email: "lol@lol.com",
+          creditLimit: 50000,
+          assetsValue: 90,
+          liabilitiesValue: 20
+        };
+        let currentState = { ...wrapper.state() };
+        currentState.textfieldsArr.forEach(e => {
+          if (obj[e.name]) {
+            e.value = obj[e.name];
+            e.error = false;
+          }
+        });
+        wrapper.find("#submitBtn").simulate("click", {
+          preventDefault: () => {}
+        });
+        let payload = {
+          status: "Success",
+          msg: "Credit Card successfully created!"
+        };
+        expect(onFormSubmit).toHaveBeenLastCalledWith({
+          ...obj,
+          accountType: "Credit Card"
+        });
+        expect(onShowDialogAlert).toHaveBeenLastCalledWith(payload);
+        expect(wrapper.state()).toEqual(initialState);
+      });
+    });
   });
 });
