@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, makeStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "./MenuHeader.css";
 
 const useStyles = makeStyles(theme => ({
@@ -19,9 +19,16 @@ const MenuHeader = props => {
   return (
     <AppBar position="relative" className={classes.menu__header__container}>
       <Link to="/">Banking App</Link>
-      <div className="menu__links">
-        <Link to="/transfer-money">Transfer Money</Link>
-        <Link to="/open-new-acc">Open Accounts</Link>
+      <div className="menu__NavLinks">
+        <NavLink activeClassName="active__Link" to="/" exact>
+          Home
+        </NavLink>
+        <NavLink activeClassName="active__Link" to="/transfer-money" exact>
+          Transfer Money
+        </NavLink>
+        <NavLink activeClassName="active__Link" to="/open-new-acc" exact>
+          Open Accounts
+        </NavLink>
       </div>
     </AppBar>
   );

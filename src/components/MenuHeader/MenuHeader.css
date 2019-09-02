@@ -6,21 +6,29 @@
 }
 
 a {
-  margin: 1%;
+  /* margin: 1.5%; */
+  padding: 1% 1.5%;
   font-size: 1em;
-  font-weight: bold;
+  /* font-weight: bold; */
   text-decoration: none;
   color: white;
 }
 
-.menu__links {
+.menu__NavLinks {
   display: flex;
   justify-content: flex-end;
+  align-content: center;
+  align-self: center;
+  flex: 0.3;
+  text-align: center;
 }
 
-.menu__links a {
-  font-size: 1em;
-  font-weight: bold;
+.menu__NavLinks a {
+  font-size: 0.9em;
   text-decoration: none;
   flex: 1;
+}
+
+.active__Link {
+  font-weight: bold;
 }
