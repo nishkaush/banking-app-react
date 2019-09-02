@@ -1,3 +1,205 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CreditCardAppForm/> renders credit card app form correctly 1`] = `ShallowWrapper {}`;
+exports[`<CreditCardAppForm/> checks the Full Name Field Successful form submission successfully submits the form 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="md"
+>
+  <h2>
+    Credit card form (Made Manually)
+  </h2>
+  <form
+    action=""
+    className="credit__card__app__form"
+  >
+    <label
+      htmlFor="fullName"
+    >
+      Full Name *
+    </label>
+    <input
+      autoFocus={true}
+      id="fullName"
+      name="fullName"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="text"
+      value="Maximillian"
+    />
+    <label
+      htmlFor="email"
+    >
+      Email *
+    </label>
+    <input
+      autoFocus={false}
+      id="email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="email"
+      value="lol@lol.com"
+    />
+    <label
+      htmlFor="creditLimit"
+    >
+      Credit Limit ($) *
+    </label>
+    <input
+      autoFocus={false}
+      id="creditLimit"
+      name="creditLimit"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="number"
+      value={50000}
+    />
+    <label
+      htmlFor="assetsValue"
+    >
+      Total Assets Value ($) *
+    </label>
+    <input
+      autoFocus={false}
+      id="assetsValue"
+      name="assetsValue"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="number"
+      value={90}
+    />
+    <label
+      htmlFor="liabilitiesValue"
+    >
+      Total Liabilities Value ($) *
+    </label>
+    <input
+      autoFocus={false}
+      id="liabilitiesValue"
+      name="liabilitiesValue"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="number"
+      value={200}
+    />
+    <div
+      className="btn_container"
+    >
+      <button
+        key="10923"
+        onClick={[Function]}
+      >
+        Quit Application
+      </button>
+      <button
+        id="submitBtn"
+        key="93499"
+        onClick={[Function]}
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</WithStyles(ForwardRef(Container))>
+`;
+
+exports[`<CreditCardAppForm/> renders credit card app form correctly 1`] = `
+<WithStyles(ForwardRef(Container))
+  maxWidth="md"
+>
+  <h2>
+    Credit card form (Made Manually)
+  </h2>
+  <form
+    action=""
+    className="credit__card__app__form"
+  >
+    <label
+      htmlFor="fullName"
+    >
+      Full Name *
+    </label>
+    <input
+      autoFocus={true}
+      id="fullName"
+      name="fullName"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <label
+      htmlFor="email"
+    >
+      Email *
+    </label>
+    <input
+      autoFocus={false}
+      id="email"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="email"
+      value=""
+    />
+    <label
+      htmlFor="creditLimit"
+    >
+      Credit Limit ($) *
+    </label>
+    <input
+      autoFocus={false}
+      id="creditLimit"
+      name="creditLimit"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="number"
+      value=""
+    />
+    <label
+      htmlFor="assetsValue"
+    >
+      Total Assets Value ($) *
+    </label>
+    <input
+      autoFocus={false}
+      id="assetsValue"
+      name="assetsValue"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="number"
+      value=""
+    />
+    <label
+      htmlFor="liabilitiesValue"
+    >
+      Total Liabilities Value ($) *
+    </label>
+    <input
+      autoFocus={false}
+      id="liabilitiesValue"
+      name="liabilitiesValue"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="number"
+      value=""
+    />
+    <div
+      className="btn_container"
+    >
+      <button
+        key="10923"
+        onClick={[Function]}
+      >
+        Quit Application
+      </button>
+      <button
+        id="submitBtn"
+        key="93499"
+        onClick={[Function]}
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</WithStyles(ForwardRef(Container))>
+`;

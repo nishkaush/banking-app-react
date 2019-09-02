@@ -206,6 +206,7 @@ describe("<CreditCardAppForm/>", () => {
         });
         expect(onShowDialogAlert).toHaveBeenLastCalledWith(payload);
         expect(wrapper.state()).toEqual(initialState);
+        expect(wrapper).toMatchSnapshot();
       });
     });
   });

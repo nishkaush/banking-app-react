@@ -12,7 +12,7 @@ describe("<AccountInfo/>", () => {
     fullName: "Maximillian",
     email: "max@max.com",
     depositOrLimitTxt: "credit limit",
-    depositOrLimitVal: 5000
+    depositOrLimitVal: "5000"
   };
   const wrapper = mount(<AccountInfo {...data} />);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import propTypes from "prop-types";
 
 const AccountInfo = props => {
   return (
@@ -32,4 +33,23 @@ const AccountInfo = props => {
   );
 };
 
+AccountInfo.propTypes = {
+  balance: propTypes.number.isRequired,
+  dateOpened: propTypes.oneOfType([propTypes.string, propTypes.number])
+    .isRequired,
+  fullName: propTypes.string.isRequired,
+  email: propTypes.string.isRequired,
+  depositOrLimitTxt: propTypes.string.isRequired,
+  depositOrLimitVal: propTypes.oneOfType([propTypes.string, propTypes.number])
+    .isRequired
+};
+
+AccountInfo.defaultProps = {
+  balance: 0,
+  dateOpened: 109,
+  fullName: "",
+  email: "",
+  depositOrLimitTxt: "",
+  depositOrLimitVal: ""
+};
 export default AccountInfo;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
+import propTypes from "prop-types";
 import "./CreditCardAppForm.css";
 
 export class CreditCardAppForm extends Component {
@@ -272,6 +273,19 @@ const mapDispatchToProps = dispatch => {
     onShowDialogAlert: payload => dispatch({ type: "SHOW_DIALOG", payload })
   };
 };
+
+CreditCardAppForm.propTypes = {
+  onFormSubmit: propTypes.func.isRequired,
+  onShowDialogAlert: propTypes.func.isRequired,
+  quitForm: propTypes.func.isRequired
+};
+
+CreditCardAppForm.defaultProps = {
+  onFormSubmit: () => {},
+  onShowDialogAlert: () => {},
+  quitForm: () => {}
+};
+
 export default connect(
   null,
   mapDispatchToProps

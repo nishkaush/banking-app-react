@@ -1,5 +1,6 @@
 import React from "react";
 import "./TransactionListing.css";
+import propTypes from "prop-types";
 import moment from "moment";
 import {
   ExpansionPanel,
@@ -62,4 +63,34 @@ const TransactionListing = props => {
   );
 };
 
+TransactionListing.propTypes = {
+  tran: propTypes.shape({
+    to: propTypes.shape({
+      id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired
+    }),
+    from: propTypes.shape({
+      id: propTypes.string.isRequired,
+      name: propTypes.string.isRequired
+    }),
+    transactionType: propTypes.oneOf(["CREDIT", "DEBIT"]),
+    amount: propTypes.oneOfType([propTypes.string, propTypes.number])
+      .isRequired,
+    date: propTypes.oneOfType([propTypes.string, propTypes.number]).isRequired,
+    message: propTypes.string.isRequired
+  })
+};
+
+TransactionListing.defaultProps = {
+  tran: {
+    from: {
+      id: "asdsd23422342",
+      name: "Credit Card"
+    },
+    transactionType: "CREDIT",
+    amount: 6000,
+    date: 1034534523,
+    message: "sample"
+  }
+};
 export default TransactionListing;

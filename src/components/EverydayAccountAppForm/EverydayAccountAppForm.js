@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import propTypes from "prop-types";
 import "./EverydayAccountAppForm.css";
 import {
   TextField,
@@ -197,6 +198,12 @@ const mapDispatchToProps = dispatch => {
       dispatch({ type: "EVERYDAY_ACC_FORM_SUBMIT", payload: formData }),
     onShowDialog: payload => dispatch({ type: "SHOW_DIALOG", payload })
   };
+};
+
+EveryDayAccountAppForm.propTypes = {
+  onFormSubmit: propTypes.func.isRequired,
+  onShowDialog: propTypes.func.isRequired,
+  quitForm: propTypes.func.isRequired
 };
 export default connect(
   null,

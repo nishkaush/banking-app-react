@@ -1,5 +1,6 @@
 import React from "react";
 import { TableCell, TableRow, Icon, makeStyles } from "@material-ui/core";
+import propTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   accountNameColor: {
@@ -39,6 +40,22 @@ const AccountsListing = props => {
       </TableCell>
     </TableRow>
   );
+};
+
+AccountsListing.propTypes = {
+  showTransactions: propTypes.func.isRequired,
+  name: propTypes.string.isRequired,
+  balance: propTypes.number,
+  available: propTypes.number,
+  delete: propTypes.func.isRequired
+};
+
+AccountsListing.defaultProps = {
+  showTransactions: () => {},
+  name: "",
+  balance: 0,
+  available: 0,
+  delete: () => {}
 };
 
 export default AccountsListing;
