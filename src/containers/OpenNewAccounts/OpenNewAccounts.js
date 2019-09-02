@@ -27,6 +27,7 @@ class OpenNewAccounts extends Component {
         {this.state.btnData.map(btn => {
           return (
             <Button
+              className="application__choose__btn"
               key={btn.text}
               size="large"
               color={btn.color}

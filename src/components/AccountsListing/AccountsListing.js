@@ -29,11 +29,13 @@ const AccountsListing = props => {
       >
         {props.balance ? props.balance : null}
       </TableCell>
-      <TableCell>
+      <TableCell className="available__balance">
         {props.available ? (props.available > 0 ? props.available : 0) : null}
       </TableCell>
       <TableCell>
-        <Icon onClick={props.delete}>delete</Icon>
+        <Icon className="delete__icon" onClick={props.delete}>
+          delete
+        </Icon>
       </TableCell>
     </TableRow>
   );

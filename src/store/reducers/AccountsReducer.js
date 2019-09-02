@@ -2,21 +2,21 @@ const initialState = {
   viewTransactionsForAcc: {},
   userAccounts: [
     // {
-    //   id: "2",
-    //   accountType: "Credit card",
-    //   balance: 9000,
-    //   dateOpened: "3March 2019",
-    //   fullName: "Maximillian",
-    //   email: "shit@s.com",
-    //   creditLimit: 5000,
+    // id: "2",
+    // accountType: "Credit card",
+    // balance: 9000,
+    // dateOpened: "3March 2019",
+    // fullName: "Maximillian",
+    // email: "shit@s.com",
+    // creditLimit: 5000,
     //   transactions: [
-    //     {
-    //       transactionType: "CREDIT",
-    //       from: { id: "asdfsadfasdasfID", name: "Savings Account" },
-    //       date: Date.now(),
-    //       amount: 400000,
-    //       message: "This is a sample transaction message"
-    //     }
+    // {
+    //   transactionType: "CREDIT",
+    //   from: { id: "asdfsadfasdasfID", name: "Savings Account" },
+    //   date: Date.now(),
+    //   amount: 400000,
+    //   message: "This is a sample transaction message"
+    // }
     //   ]
     // }
   ]

@@ -5,9 +5,8 @@ import AccountInfo from "./../../components/AccountInfo/AccountInfo";
 import "./TransactionsListing.css";
 import { Container } from "@material-ui/core";
 
-class TransactionsListing extends Component {
+export class TransactionsListing extends Component {
   componentDidMount() {
-    console.log("[TransactionsListing]-this.props", this.props);
     this.props.onFindTransactions(this.props.match.params.id);
   }
   render() {

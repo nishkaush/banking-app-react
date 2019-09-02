@@ -22,7 +22,9 @@ const DialogAlert = props => {
   return (
     <Dialog maxWidth="sm" open={props.open}>
       <DialogActions>
-        <Icon onClick={props.close}>close</Icon>
+        <Icon className="close__btn" onClick={props.close}>
+          close
+        </Icon>
       </DialogActions>
       <DialogTitle
         className={props.status === "Error" ? classes.error : classes.success}
@@ -30,7 +32,9 @@ const DialogAlert = props => {
         {props.status}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>{props.msg}</DialogContentText>
+        <DialogContentText className="alert__msg">
+          {props.msg}
+        </DialogContentText>
       </DialogContent>
     </Dialog>
   );

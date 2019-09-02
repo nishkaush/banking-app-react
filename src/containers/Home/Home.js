@@ -11,7 +11,7 @@ import {
   TableRow
 } from "@material-ui/core";
 
-class Home extends Component {
+export class Home extends Component {
   deleteAcccount(accID) {
     this.props.onDeleteAccount(accID);
   }
@@ -59,7 +59,11 @@ class Home extends Component {
         </Table>
       );
     } else {
-      return <p>No Accounts Found. Open new accounts to start playing.</p>;
+      return (
+        <p className="no__acc__found__text">
+          No Accounts Found. Open new accounts to start playing.
+        </p>
+      );
     }
   }
 

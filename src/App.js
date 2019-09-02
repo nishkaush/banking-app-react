@@ -9,7 +9,7 @@ import DialogAlert from "./components/DialogAlert/DialogAlert";
 import TransactionsListing from "./containers/TransactionsListing/TransactionsListing";
 import "./App.css";
 
-class App extends Component {
+export class App extends Component {
   state = {
     showSpinner: false
   };

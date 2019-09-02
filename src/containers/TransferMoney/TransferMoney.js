@@ -3,7 +3,7 @@ import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import "./TransferMoney.css";
 
-class TransferMoney extends Component {
+export class TransferMoney extends Component {
   state = {
     formFields: [
       {
@@ -107,6 +107,7 @@ class TransferMoney extends Component {
               </select>
             ) : (
               <input
+                name={field.name}
                 key={field.label}
                 type={field.valueType}
                 value={field.value}
@@ -115,7 +116,12 @@ class TransferMoney extends Component {
               />
             )
           )}
-          <button onClick={this.handleFormSubmit.bind(this)}>Submit</button>
+          <button
+            className="submit__btn"
+            onClick={this.handleFormSubmit.bind(this)}
+          >
+            Submit
+          </button>
         </form>
       </Container>
     );
