@@ -11,6 +11,8 @@ import {
   MenuItem,
   InputLabel
 } from "@material-ui/core";
+import { showDialogAC } from "./../../actionCreators/dialogalert";
+import { everydayAccFormSubmitAC } from "./../../actionCreators/accounts";
 
 class EveryDayAccountAppForm extends Component {
   state = {
@@ -124,7 +126,7 @@ class EveryDayAccountAppForm extends Component {
         return state;
       });
     });
-    this.props.onShowDialog(payload);
+    this.props.onShowDialog(showDialogAC(payload));
   }
 
   submitDataToRedux() {
@@ -132,11 +134,13 @@ class EveryDayAccountAppForm extends Component {
     this.state.textfieldsArr.forEach(elm => {
       payload[elm.name] = elm.value;
     });
-    this.props.onFormSubmit(payload);
-    this.props.onShowDialog({
-      status: "Success",
-      msg: "Account created successfully!"
-    });
+    this.props.onFormSubmit(everydayAccFormSubmitAC(payload));
+    this.props.onShowDialog(
+      showDialogAC({
+        status: "Success",
+        msg: "Account created successfully!"
+      })
+    );
     this.setState(state => {
       state.textfieldsArr.forEach(field => {
         field.value = "";
@@ -175,7 +179,7 @@ class EveryDayAccountAppForm extends Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => this.props.quitForm(null)}
+            onClick={e => this.props.quitForm(null, e)}
           >
             Quit Application
           </Button>
@@ -194,9 +198,8 @@ class EveryDayAccountAppForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFormSubmit: formData =>
-      dispatch({ type: "EVERYDAY_ACC_FORM_SUBMIT", payload: formData }),
-    onShowDialog: payload => dispatch({ type: "SHOW_DIALOG", payload })
+    onFormSubmit: action => dispatch(action),
+    onShowDialog: action => dispatch(action)
   };
 };
 

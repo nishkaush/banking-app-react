@@ -46,7 +46,7 @@ AccountsListing.propTypes = {
   showTransactions: propTypes.func.isRequired,
   name: propTypes.string.isRequired,
   balance: propTypes.number,
-  available: propTypes.number,
+  available: propTypes.oneOfType([propTypes.number, propTypes.string]),
   delete: propTypes.func.isRequired
 };
 

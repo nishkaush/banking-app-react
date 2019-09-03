@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Container, makeStyles } from "@material-ui/core";
+import { Button, Container } from "@material-ui/core";
 import "./OpenNewAccounts.css";
 import EverydayAccountAppForm from "./../../components/EverydayAccountAppForm/EverydayAccountAppForm";
 import CreditCardAppForm from "./../../components/CreditCardAppForm/CreditCardAppForm";
@@ -17,7 +17,8 @@ class OpenNewAccounts extends Component {
     ]
   };
 
-  chosenApplicationFormHandler(formType) {
+  chosenApplicationFormHandler(formType, event) {
+    event.preventDefault();
     this.setState({ chosenApplicationType: formType });
   }
 

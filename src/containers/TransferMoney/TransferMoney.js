@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import "./TransferMoney.css";
+import { showDialogAC } from "./../../actionCreators/dialogalert";
+import { transferMoneyAC } from "./../../actionCreators/accounts";
 
 export class TransferMoney extends Component {
   state = {
@@ -51,11 +53,13 @@ export class TransferMoney extends Component {
     let areToAndFromAccountsDifferent = this.checkFromAndToAccounts();
     isFormValid && areToAndFromAccountsDifferent
       ? this.submitFormData()
-      : this.props.onShowDialog({
-          status: "Error",
-          msg:
-            "Ensure to and from accounts are different and all required fields have a value"
-        });
+      : this.props.onShowDialog(
+          showDialogAC({
+            status: "Error",
+            msg:
+              "Ensure to and from accounts are different and all required fields have a value"
+          })
+        );
   }
 
   checkFormValidity() {
@@ -77,8 +81,10 @@ export class TransferMoney extends Component {
     this.state.formFields.forEach(field => {
       payload[field.name] = field.value;
     });
-    this.props.onFormSubmit(payload);
-    this.props.onShowDialog({ status: "Success", msg: "Transfer Sucessful!" });
+    this.props.onFormSubmit(transferMoneyAC(payload));
+    this.props.onShowDialog(
+      showDialogAC({ status: "Success", msg: "Transfer Sucessful!" })
+    );
     this.setState(state => state.formFields.forEach(e => (e.value = "")));
   }
 
@@ -136,8 +142,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFormSubmit: payload => dispatch({ type: "TRANSFER__MONEY", payload }),
-    onShowDialog: payload => dispatch({ type: "SHOW_DIALOG", payload })
+    onFormSubmit: action => dispatch(action),
+    onShowDialog: action => dispatch(action)
   };
 };
 

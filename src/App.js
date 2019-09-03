@@ -8,6 +8,7 @@ import OpenNewAccounts from "./containers/OpenNewAccounts/OpenNewAccounts";
 import DialogAlert from "./components/DialogAlert/DialogAlert";
 import TransactionsListing from "./containers/TransactionsListing/TransactionsListing";
 import "./App.css";
+import { closeDialogAC } from "./actionCreators/dialogalert";
 
 export class App extends Component {
   state = {
@@ -18,6 +19,11 @@ export class App extends Component {
   //   // this.setState({ showSpinner: false });
   //   // setTimeout(() => this.setState({ showSpinner: false }), 500);
   // }
+
+  closeDialog() {
+    this.props.onCloseDialog(closeDialogAC());
+  }
+
   render() {
     const comp = (
       <React.Fragment>
@@ -25,7 +31,7 @@ export class App extends Component {
           open={this.props.showDialog}
           status={this.props.dialogStatus}
           msg={this.props.dialogMsg}
-          close={this.props.onCloseDialog.bind(this)}
+          close={this.closeDialog.bind(this)}
         />
         <MenuHeader />
         <Switch>
@@ -56,7 +62,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCloseDialog: () => dispatch({ type: "CLOSE_DIALOG" })
+    onCloseDialog: action => dispatch(action)
   };
 };
 

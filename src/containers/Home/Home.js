@@ -10,10 +10,11 @@ import {
   TableHead,
   TableRow
 } from "@material-ui/core";
+import { deleteAccountAC } from "./../../actionCreators/accounts";
 
 export class Home extends Component {
   deleteAcccount(accID) {
-    this.props.onDeleteAccount(accID);
+    this.props.onDeleteAccount(deleteAccountAC(accID));
   }
 
   handleShowTransactionsListingPage(accID) {
@@ -86,7 +87,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onDeleteAccount: accID => dispatch({ type: "DELETE__ACCOUNT", id: accID })
+    onDeleteAccount: action => dispatch(action)
   };
 };
 export default connect(

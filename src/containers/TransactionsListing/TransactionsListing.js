@@ -4,10 +4,13 @@ import TransactionListing from "./../../components/TransactionListing/Transactio
 import AccountInfo from "./../../components/AccountInfo/AccountInfo";
 import "./TransactionsListing.css";
 import { Container } from "@material-ui/core";
+import { viewAccTransactionsAC } from "./../../actionCreators/accounts";
 
 export class TransactionsListing extends Component {
   componentDidMount() {
-    this.props.onFindTransactions(this.props.match.params.id);
+    this.props.onFindTransactions(
+      viewAccTransactionsAC(this.props.match.params.id)
+    );
   }
   render() {
     const initialDeposit = this.props.account.initialDeposit;
@@ -48,7 +51,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFindTransactions: id => dispatch({ type: "VIEW__ACC__TRANSACTIONS", id })
+    onFindTransactions: action => dispatch(action)
   };
 };
 export default connect(

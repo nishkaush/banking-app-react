@@ -3,6 +3,8 @@ import { Container } from "@material-ui/core";
 import { connect } from "react-redux";
 import propTypes from "prop-types";
 import "./CreditCardAppForm.css";
+import { showDialogAC } from "./../../actionCreators/dialogalert";
+import { creditCardAppFormSubmitAC } from "./../../actionCreators/accounts";
 
 export class CreditCardAppForm extends Component {
   state = {
@@ -143,11 +145,13 @@ export class CreditCardAppForm extends Component {
     let assetsMoreThanLiabilities = this.checkAssetsAndLiabilities();
     let payload = this.preparePayloadForFormSubmission();
     if (allFieldsAreValid && assetsMoreThanLiabilities) {
-      this.props.onFormSubmit(payload);
-      this.props.onShowDialogAlert({
-        status: "Success",
-        msg: "Credit Card successfully created!"
-      });
+      this.props.onFormSubmit(creditCardAppFormSubmitAC(payload));
+      this.props.onShowDialogAlert(
+        showDialogAC({
+          status: "Success",
+          msg: "Credit Card successfully created!"
+        })
+      );
       this.resetForm();
     } else {
       this.handleErrorOnFormSubmit(
@@ -210,10 +214,12 @@ export class CreditCardAppForm extends Component {
     }
   }
   showErrorAlert(msg) {
-    this.props.onShowDialogAlert({
-      status: "Error",
-      msg
-    });
+    this.props.onShowDialogAlert(
+      showDialogAC({
+        status: "Error",
+        msg
+      })
+    );
   }
 
   render() {
@@ -249,7 +255,7 @@ export class CreditCardAppForm extends Component {
             </React.Fragment>
           ))}
           <div className="btn_container">
-            <button key={10923} onClick={() => this.props.quitForm(null)}>
+            <button key={10923} onClick={e => this.props.quitForm(null, e)}>
               Quit Application
             </button>
             <button
@@ -268,9 +274,8 @@ export class CreditCardAppForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFormSubmit: payload =>
-      dispatch({ type: "CREDITCARD__APP__FORM__SUBMIT", payload }),
-    onShowDialogAlert: payload => dispatch({ type: "SHOW_DIALOG", payload })
+    onFormSubmit: action => dispatch(action),
+    onShowDialogAlert: action => dispatch(action)
   };
 };
 
