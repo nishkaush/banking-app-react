@@ -6,7 +6,8 @@ describe("<MenuHeader/>", () => {
   const wrapper = shallow(<MenuHeader />);
 
   it("renders 3 links upon load", () => {
-    expect(wrapper.find("Link")).toHaveLength(3);
+    expect(wrapper.find("NavLink")).toHaveLength(3);
+    expect(wrapper.find("Link")).toHaveLength(1);
   });
 
   it("renders first link with the 'to' prop = / aka home", () => {
@@ -21,7 +22,7 @@ describe("<MenuHeader/>", () => {
   it("renders last link with the 'to' prop = /open-new-acc", () => {
     expect(
       wrapper
-        .find("Link")
+        .find("NavLink")
         .last()
         .prop("to")
     ).toEqual("/open-new-acc");

@@ -41,9 +41,12 @@ describe("<TransferMoney/>", () => {
       .find(".submit__btn")
       .simulate("click", { preventDefault: () => "" });
     expect(onShowDialog).toHaveBeenCalledWith({
-      status: "Error",
-      msg:
-        "Ensure to and from accounts are different and all required fields have a value"
+      type: "SHOW_DIALOG",
+      payload: {
+        status: "Error",
+        msg:
+          "Ensure to and from accounts are different and all required fields have a value"
+      }
     });
   });
 
@@ -67,10 +70,16 @@ describe("<TransferMoney/>", () => {
       .simulate("click", { preventDefault: () => "" });
 
     expect(onFormSubmit).toHaveBeenCalledTimes(1);
-    expect(onFormSubmit).toHaveBeenCalledWith(payload);
+    expect(onFormSubmit).toHaveBeenCalledWith({
+      type: "TRANSFER__MONEY",
+      payload
+    });
     expect(onShowDialog).toHaveBeenCalledWith({
-      status: "Success",
-      msg: "Transfer Sucessful!"
+      type: "SHOW_DIALOG",
+      payload: {
+        status: "Success",
+        msg: "Transfer Sucessful!"
+      }
     });
     expect(wrapper.state()).toEqual(initialState);
   });

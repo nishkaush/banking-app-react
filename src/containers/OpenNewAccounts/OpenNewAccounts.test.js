@@ -16,7 +16,7 @@ describe("<OpenNewAccounts/>", () => {
       wrapper
         .find(".application__choose__btn")
         .at(1)
-        .simulate("click");
+        .simulate("click", { preventDefault: () => {} });
       expect(wrapper.find("EverydayAccountAppForm").exists()).toBe(false);
       expect(wrapper.find(CreditCardAppForm).exists()).toEqual(true);
       expect(wrapper.find(".application__choose__btn").exists()).toBe(false);
@@ -30,7 +30,7 @@ describe("<OpenNewAccounts/>", () => {
       wrapper
         .find(".application__choose__btn")
         .first()
-        .simulate("click");
+        .simulate("click", { preventDefault: () => {} });
       expect(wrapper.find(EverydayAccountAppForm).exists()).toBe(true);
     });
   });

@@ -117,8 +117,8 @@ describe("<CreditCardAppForm/>", () => {
         let msg =
           "Provide a valid value for all required fields (marked with *) and ensure assets value is bigger than liabilities";
         let status = "Error";
-
-        expect(onShowDialogAlert).toHaveBeenLastCalledWith({ status, msg });
+        const payload = { type: "SHOW_DIALOG", payload: { status, msg } };
+        expect(onShowDialogAlert).toHaveBeenLastCalledWith(payload);
         expect(onShowDialogAlert).toHaveBeenCalledTimes(1);
       });
 
@@ -138,7 +138,8 @@ describe("<CreditCardAppForm/>", () => {
         let msg =
           "Provide a valid value for all required fields (marked with *)";
         let status = "Error";
-        expect(onShowDialogAlert).toHaveBeenLastCalledWith({ status, msg });
+        const payload = { type: "SHOW_DIALOG", payload: { status, msg } };
+        expect(onShowDialogAlert).toHaveBeenLastCalledWith(payload);
       });
 
       //Third scenario :
@@ -165,7 +166,8 @@ describe("<CreditCardAppForm/>", () => {
         });
         let msg = "Make sure assets value is bigger than liabilities";
         let status = "Error";
-        expect(onShowDialogAlert).toHaveBeenLastCalledWith({ status, msg });
+        const payload = { type: "SHOW_DIALOG", payload: { status, msg } };
+        expect(onShowDialogAlert).toHaveBeenLastCalledWith(payload);
       });
     });
 
@@ -201,10 +203,16 @@ describe("<CreditCardAppForm/>", () => {
           msg: "Credit Card successfully created!"
         };
         expect(onFormSubmit).toHaveBeenLastCalledWith({
-          ...obj,
-          accountType: "Credit Card"
+          type: "CREDITCARD__APP__FORM__SUBMIT",
+          payload: {
+            ...obj,
+            accountType: "Credit Card"
+          }
         });
-        expect(onShowDialogAlert).toHaveBeenLastCalledWith(payload);
+        expect(onShowDialogAlert).toHaveBeenLastCalledWith({
+          type: "SHOW_DIALOG",
+          payload
+        });
         expect(wrapper.state()).toEqual(initialState);
         expect(wrapper).toMatchSnapshot();
       });

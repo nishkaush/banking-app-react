@@ -43,8 +43,9 @@ describe("<TransactionsListing/>", () => {
     });
 
     it("calls onFindTransactions upon mounting", () => {
+      const payload = { id: match.params.id, type: "VIEW__ACC__TRANSACTIONS" };
       expect(onFindTransactions).toHaveBeenCalledTimes(1);
-      expect(onFindTransactions).toHaveBeenCalledWith(match.params.id);
+      expect(onFindTransactions).toHaveBeenCalledWith(payload);
     });
 
     it("render AccountInfo component correctly", () => {
